@@ -8,7 +8,7 @@ enum  Formula {
         this.price = price;
     }
 
-    public int getPrice() {
+    public int getNominalPrice() {
         return price;
     }
 }
