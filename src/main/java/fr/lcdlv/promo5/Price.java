@@ -2,6 +2,7 @@ package fr.lcdlv.promo5;
 
 class Price {
 
+    private static final int MEAL_PRICE = 40;
     private final Formula formula;
 
     static int of(Formula formula) {
@@ -12,10 +13,10 @@ class Price {
     }
 
     static int of(Booking booking) {
-        if (!booking.isSingle()){
-            return 470;
+        if (booking.isSingle()) {
+            return Formula.SINGLE.getNominalPrice() - MEAL_PRICE;
         }
-        return 570;
+        return Formula.TWIN.getNominalPrice() - MEAL_PRICE;
     }
 
     private boolean isFor(Formula formula) {
