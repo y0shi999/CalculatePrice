@@ -1,3 +1,5 @@
+package fr.lcdlv.promo5;
+
 enum  Formula {
      SINGLE(610),
     TWIN(510);

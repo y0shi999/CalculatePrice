@@ -1,3 +1,5 @@
+package fr.lcdlv.promo5;
+
 class Price {
 
     private final Formula formula;
@@ -9,7 +11,7 @@ class Price {
         return Formula.SINGLE.getNominalPrice();
     }
 
-    static int of(Formula choice, String checkIn) {
+    static int of(Booking booking) {
         return 570;
     }
 

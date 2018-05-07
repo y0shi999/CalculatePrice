@@ -1,3 +1,8 @@
+package fr.lcdlv.promo5;
+
+import fr.lcdlv.promo5.Booking;
+import fr.lcdlv.promo5.Formula;
+import fr.lcdlv.promo5.Price;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,7 +23,7 @@ public class CalculatePriceTest {
 
     @Test
     public void shouldReturnDecreasedPriceInLateCheckIn() {
-        assertThat(Price.of(Formula.SINGLE, "Friday"))
+        assertThat(Price.of(new Booking(Formula.SINGLE, "Friday")))
             .isEqualTo(570);
     }
 }
