@@ -1,15 +1,17 @@
 package fr.lcdlv.promo5;
 
 class Booking {
-    private final Formula choice;
-    private final String checkIn;
+    private final Formula formula;
+    private final CheckIn checkIn;
+    private final CheckOut checkOut;
 
-    Booking(Formula choice, String checkIn) {
-        this.choice = choice;
+    Booking(Formula formula, CheckIn checkIn, CheckOut checkOut) {
+        this.formula = formula;
         this.checkIn = checkIn;
+        this.checkOut = checkOut;
     }
 
-    boolean isSingle() {
-        return choice.name().equalsIgnoreCase(Formula.SINGLE.toString());
+    int getFormulaNominalPrice() {
+        return this.formula.getNominalPrice();
     }
 }

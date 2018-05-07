@@ -11,15 +11,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CalculatePriceTest {
 
     @Test
-    public void shouldReturnFullPriceInNominalCaseSingle() {
-        assertThat(Price.of(Formula.SINGLE))
-            .isEqualTo(Formula.SINGLE.getNominalPrice());
-    }
+    @Parameters(
+        {"SINGLE, 610",
+            "TWIN, 510"})
+    public void shouldReturnFulPriceInNominalCase(Formula formula, int expectedPrice) {
 
-    @Test
-    public void shouldReturnFullPriceInNominalCaseTwin() {
-        assertThat(Price.of(Formula.TWIN))
-            .isEqualTo(Formula.TWIN.getNominalPrice());
+        assertThat(new Booking(formula, new CheckIn("Thursday"), new CheckOut("Sunday", "15")).getFormulaNominalPrice())
+            .isEqualTo(expectedPrice);
+
     }
 
     @Test
@@ -27,7 +26,7 @@ public class CalculatePriceTest {
         {"SINGLE, 570",
             "TWIN, 470"})
     public void shouldReturnDecreasedPriceInLateCheckIn(Formula formula, int expectedPrice) {
-        assertThat(Price.of(new Booking(formula, "Friday")))
+        assertThat(Price.of(new Booking(formula, new CheckIn("Friday"),  new CheckOut("Sunday", "15"))))
             .isEqualTo(expectedPrice);
     }
 
