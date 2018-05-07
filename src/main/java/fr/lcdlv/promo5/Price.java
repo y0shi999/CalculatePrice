@@ -12,6 +12,9 @@ class Price {
     }
 
     static int of(Booking booking) {
+        if (!booking.isSingle()){
+            return 470;
+        }
         return 570;
     }
 

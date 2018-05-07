@@ -1,12 +1,13 @@
 package fr.lcdlv.promo5;
 
-import fr.lcdlv.promo5.Booking;
-import fr.lcdlv.promo5.Formula;
-import fr.lcdlv.promo5.Price;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@RunWith(JUnitParamsRunner.class)
 public class CalculatePriceTest {
 
     @Test
@@ -22,8 +23,12 @@ public class CalculatePriceTest {
     }
 
     @Test
-    public void shouldReturnDecreasedPriceInLateCheckIn() {
-        assertThat(Price.of(new Booking(Formula.SINGLE, "Friday")))
-            .isEqualTo(570);
+    @Parameters(
+        {"SINGLE, 570",
+            "TWIN, 470"})
+    public void shouldReturnDecreasedPriceInLateCheckIn(Formula formula, int expectedPrice) {
+        assertThat(Price.of(new Booking(formula, "Friday")))
+            .isEqualTo(expectedPrice);
     }
+
 }

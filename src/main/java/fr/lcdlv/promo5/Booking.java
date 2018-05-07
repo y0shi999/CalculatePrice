@@ -8,4 +8,8 @@ class Booking {
         this.choice = choice;
         this.checkIn = checkIn;
     }
+
+    boolean isSingle() {
+        return choice.name().equalsIgnoreCase(Formula.SINGLE.toString());
+    }
 }
