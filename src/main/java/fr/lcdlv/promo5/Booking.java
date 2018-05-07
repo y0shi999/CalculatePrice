@@ -12,6 +12,10 @@ class Booking {
     }
 
     int getPrice() {
+        if(this.checkIn.isAfter("Thursday")) {
+            return formula.getNominalPrice() - 40;
+        }
+
         if(this.checkOut.isBefore("Sunday",12)) {
             return formula.getNominalPrice() - 40;
         }
