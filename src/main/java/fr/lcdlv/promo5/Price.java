@@ -6,7 +6,7 @@ class Price {
     private final Formula formula;
 
     static int of(Booking booking) {
-        return booking.getFormulaNominalPrice() - MEAL_PRICE;
+        return booking.getPrice() - MEAL_PRICE;
     }
 
     private Price(Formula formula) {
