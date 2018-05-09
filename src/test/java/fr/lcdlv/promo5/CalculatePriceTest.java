@@ -26,7 +26,6 @@ public class CalculatePriceTest {
 
         final Booking bookingWithAllMeals = new Booking(accommodation, nominalCheckIn, nominalCheckOut);
         final int price = bookingWithAllMeals.getPrice();
-
         assertThat(price).isEqualTo(expectedPrice);
     }
 

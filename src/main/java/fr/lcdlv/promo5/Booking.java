@@ -13,13 +13,29 @@ class Booking {
     }
 
     int getPrice() {
-        int price = accommodation.getNominalPrice();
-        if (this.checkIn.isAfter(Days.THURSDAY)) {
-            price= price - MEAL_PRICE;
+        return fullPackPrice() - discount();
+    }
+
+    private int fullPackPrice() {
+        return accommodation.getFullPackPrice();
+    }
+
+    private int discount() {
+        int discount=0;
+        if (isLateCheckIn()) {
+            discount+=MEAL_PRICE;
         }
-        if (this.checkOut.isBefore(Days.SUNDAY, 12)) {
-            price = price - MEAL_PRICE;
+        if (isLateCheckOut()) {
+            discount+=MEAL_PRICE;
         }
-        return price;
+        return discount;
+    }
+
+    private boolean isLateCheckOut() {
+        return this.checkOut.isBefore(Days.SUNDAY, 12);
+    }
+
+    private boolean isLateCheckIn() {
+        return this.checkIn.isAfter(Days.THURSDAY);
     }
 }

@@ -4,13 +4,13 @@ enum Accommodation {
     SINGLE(610),
     TWIN(510);
 
-    private final int price;
+    private final int fullPackPrice;
 
-    Accommodation(int price) {
-        this.price = price;
+    Accommodation(int fullPackPrice) {
+        this.fullPackPrice = fullPackPrice;
     }
 
-    public int getNominalPrice() {
-        return price;
+    public int getFullPackPrice() {
+        return fullPackPrice;
     }
 }
