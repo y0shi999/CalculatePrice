@@ -1,13 +1,13 @@
 package fr.lcdlv.promo5;
 
 class CheckIn {
-    private Days day;
+    private SeminarDays day;
 
-    CheckIn(Days day) {
+    CheckIn(SeminarDays day) {
         this.day = day;
     }
 
-    boolean isAfter(Days day) {
-        return !this.day.equals(day);
+    boolean isAfter(SeminarDays day) {
+        return this.day.isAfter(day);
     }
 }

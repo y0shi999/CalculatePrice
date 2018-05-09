@@ -5,16 +5,16 @@ import junitparams.Parameters;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static fr.lcdlv.promo5.Days.*;
+import static fr.lcdlv.promo5.SeminarDays.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(JUnitParamsRunner.class)
-public class CalculatePriceTest {
+public class CalculateBookingPriceTest {
 
     private CheckIn nominalCheckIn = new CheckIn(THURSDAY);
     private CheckOut nominalCheckOut = new CheckOut(SUNDAY, 15);
     private CheckIn lateCheckIn = new CheckIn(FRIDAY);
-    private CheckOut earlyCheckOut = new CheckOut(SUNDAY, 11);
+    private CheckOut earlyCheckOut = new CheckOut(SATURDAY, 11);
 
     @Test
     @Parameters(
@@ -65,4 +65,5 @@ public class CalculatePriceTest {
         final int price = bookingWithoutBothFirstAndLastMeal.getPrice();
         assertThat(price).isEqualTo(expectedPrice);
     }
+    
 }

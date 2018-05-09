@@ -2,6 +2,7 @@ package fr.lcdlv.promo5;
 
 class Booking {
     public static final int MEAL_PRICE = 40;
+    public static final int NOON = 12;
     private final Accommodation accommodation;
     private final CheckIn checkIn;
     private final CheckOut checkOut;
@@ -32,10 +33,10 @@ class Booking {
     }
 
     private boolean isLateCheckOut() {
-        return this.checkOut.isBefore(Days.SUNDAY, 12);
+        return this.checkOut.isBefore(SeminarDays.SUNDAY, NOON);
     }
 
     private boolean isLateCheckIn() {
-        return this.checkIn.isAfter(Days.THURSDAY);
+        return this.checkIn.isAfter(SeminarDays.THURSDAY);
     }
 }

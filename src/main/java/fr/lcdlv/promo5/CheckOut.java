@@ -1,16 +1,16 @@
 package fr.lcdlv.promo5;
 
 class CheckOut {
-    private final Days day;
+    private final SeminarDays day;
     private int hour;
 
-    CheckOut(Days day, int hour) {
+    CheckOut(SeminarDays day, int hour) {
 
         this.day = day;
         this.hour = hour;
     }
 
-    boolean isBefore(Days day, int hour) {
-        return day.equals(Days.SUNDAY) && this.hour < hour;
+    boolean isBefore(SeminarDays limitDay, int hour) {
+        return (this.day.equals(limitDay) && this.hour < hour) || this.day.isBefore(limitDay);
     }
 }
