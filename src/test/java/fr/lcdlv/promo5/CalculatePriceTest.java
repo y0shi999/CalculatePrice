@@ -2,13 +2,10 @@ package fr.lcdlv.promo5;
 
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static fr.lcdlv.promo5.Days.FRIDAY;
-import static fr.lcdlv.promo5.Days.SUNDAY;
-import static fr.lcdlv.promo5.Days.THURSDAY;
+import static fr.lcdlv.promo5.Days.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(JUnitParamsRunner.class)
@@ -26,8 +23,11 @@ public class CalculatePriceTest {
             "TWIN, 510"
         })
     public void should_return_full_price_when_booking_with_all_meals(Accommodation accommodation, int expectedPrice) {
-        assertThat(new Booking(accommodation, nominalCheckIn, nominalCheckOut).getPrice())
-            .isEqualTo(expectedPrice);
+
+        final Booking bookingWithAllMeals = new Booking(accommodation, nominalCheckIn, nominalCheckOut);
+        final int price = bookingWithAllMeals.getPrice();
+        
+        assertThat(price).isEqualTo(expectedPrice);
     }
 
     @Test
@@ -37,8 +37,9 @@ public class CalculatePriceTest {
             "TWIN, 470"
         })
     public void should_return_decreased_when_first_meal_not_taken(Accommodation accommodation, int expectedPrice) {
-        assertThat(new Booking(accommodation, lateCheckIn, nominalCheckOut).getPrice())
-            .isEqualTo(expectedPrice);
+        final Booking bookingWithoutFirstMeal = new Booking(accommodation, lateCheckIn, nominalCheckOut);
+        final int price = bookingWithoutFirstMeal.getPrice();
+        assertThat(price).isEqualTo(expectedPrice);
     }
 
     @Test
@@ -48,7 +49,9 @@ public class CalculatePriceTest {
             "TWIN, 470"
         })
     public void should_return_decreased_when_last_meal_not_taken(Accommodation accommodation, int expectedPrice) {
-        assertThat(new Booking(accommodation, nominalCheckIn, earlyCheckOut).getPrice())
+        final Booking bookingWithoutLastMeal = new Booking(accommodation, nominalCheckIn, earlyCheckOut);
+        final int price = bookingWithoutLastMeal.getPrice();
+        assertThat(price)
             .isEqualTo(expectedPrice);
     }
 
@@ -58,6 +61,8 @@ public class CalculatePriceTest {
             "SINGLE, 530"
         })
     public void should_return_decreased_when_both_first_and_last_meals_not_taken(Accommodation accommodation, int expectedPrice) {
-        assertThat(new Booking(accommodation, lateCheckIn, earlyCheckOut).getPrice()).isEqualTo(expectedPrice);
+        final Booking bookingWithoutBothFirstAndLastMeal = new Booking(accommodation, lateCheckIn, earlyCheckOut);
+        final int price = bookingWithoutBothFirstAndLastMeal.getPrice();
+        assertThat(price).isEqualTo(expectedPrice);
     }
 }
