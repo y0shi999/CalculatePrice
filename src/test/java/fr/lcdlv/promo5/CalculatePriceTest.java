@@ -26,7 +26,7 @@ public class CalculatePriceTest {
 
         final Booking bookingWithAllMeals = new Booking(accommodation, nominalCheckIn, nominalCheckOut);
         final int price = bookingWithAllMeals.getPrice();
-        
+
         assertThat(price).isEqualTo(expectedPrice);
     }
 
@@ -58,7 +58,8 @@ public class CalculatePriceTest {
     @Test
     @Parameters(
         {
-            "SINGLE, 530"
+            "SINGLE, 530",
+            "TWIN, 430"
         })
     public void should_return_decreased_when_both_first_and_last_meals_not_taken(Accommodation accommodation, int expectedPrice) {
         final Booking bookingWithoutBothFirstAndLastMeal = new Booking(accommodation, lateCheckIn, earlyCheckOut);
