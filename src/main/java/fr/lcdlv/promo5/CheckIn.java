@@ -1,13 +1,13 @@
 package fr.lcdlv.promo5;
 
 class CheckIn {
-    private String day;
+    private Days day;
 
-    CheckIn(String day) {
+    CheckIn(Days day) {
         this.day = day;
     }
 
-    boolean isAfter(String day) {
-        return !this.day.equalsIgnoreCase(day);
+    boolean isAfter(Days day) {
+        return !this.day.equals(day);
     }
 }

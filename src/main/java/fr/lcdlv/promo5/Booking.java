@@ -1,24 +1,25 @@
 package fr.lcdlv.promo5;
 
 class Booking {
-    private final Formula formula;
+    public static final int MEAL_PRICE = 40;
+    private final Accommodation accommodation;
     private final CheckIn checkIn;
     private final CheckOut checkOut;
 
-    Booking(Formula formula, CheckIn checkIn, CheckOut checkOut) {
-        this.formula = formula;
+    Booking(Accommodation accommodation, CheckIn checkIn, CheckOut checkOut) {
+        this.accommodation = accommodation;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
     }
 
     int getPrice() {
-        if(this.checkIn.isAfter("Thursday")) {
-            return formula.getNominalPrice() - 40;
+        int price = accommodation.getNominalPrice();
+        if (this.checkIn.isAfter(Days.THURSDAY)) {
+            price= price - MEAL_PRICE;
         }
-
-        if(this.checkOut.isBefore("Sunday",12)) {
-            return formula.getNominalPrice() - 40;
+        if (this.checkOut.isBefore(Days.SUNDAY, 12)) {
+            price = price - MEAL_PRICE;
         }
-        return formula.getNominalPrice();
+        return price;
     }
 }

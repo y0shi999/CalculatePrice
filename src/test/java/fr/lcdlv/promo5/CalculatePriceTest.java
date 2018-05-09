@@ -6,23 +6,18 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static fr.lcdlv.promo5.Days.FRIDAY;
+import static fr.lcdlv.promo5.Days.SUNDAY;
+import static fr.lcdlv.promo5.Days.THURSDAY;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(JUnitParamsRunner.class)
 public class CalculatePriceTest {
 
-    private CheckIn nominalCheckIn;
-    private CheckOut nominalCheckOut;
-    private CheckIn lateCheckIn;
-    private CheckOut earlyCheckOut;
-
-    @Before
-    public void setUp() throws Exception {
-        nominalCheckIn = new CheckIn("Thursday");
-        nominalCheckOut = new CheckOut("Sunday", 15);
-        lateCheckIn = new CheckIn("Friday");
-        earlyCheckOut = new CheckOut("Sunday", 11);
-    }
+    private CheckIn nominalCheckIn = new CheckIn(THURSDAY);
+    private CheckOut nominalCheckOut = new CheckOut(SUNDAY, 15);
+    private CheckIn lateCheckIn = new CheckIn(FRIDAY);
+    private CheckOut earlyCheckOut = new CheckOut(SUNDAY, 11);
 
     @Test
     @Parameters(
@@ -30,9 +25,8 @@ public class CalculatePriceTest {
             "SINGLE, 610",
             "TWIN, 510"
         })
-    public void shouldReturnFulPriceInNominalCase(Formula formula, int expectedPrice) {
-
-        assertThat(new Booking(formula, nominalCheckIn, nominalCheckOut).getPrice())
+    public void should_return_full_price_when_booking_with_all_meals(Accommodation accommodation, int expectedPrice) {
+        assertThat(new Booking(accommodation, nominalCheckIn, nominalCheckOut).getPrice())
             .isEqualTo(expectedPrice);
     }
 
@@ -42,8 +36,8 @@ public class CalculatePriceTest {
             "SINGLE, 570",
             "TWIN, 470"
         })
-    public void shouldReturnDecreasedPriceInLateCheckIn(Formula formula, int expectedPrice) {
-        assertThat(new Booking(formula, lateCheckIn, nominalCheckOut).getPrice())
+    public void should_return_decreased_when_first_meal_not_taken(Accommodation accommodation, int expectedPrice) {
+        assertThat(new Booking(accommodation, lateCheckIn, nominalCheckOut).getPrice())
             .isEqualTo(expectedPrice);
     }
 
@@ -53,10 +47,17 @@ public class CalculatePriceTest {
             "SINGLE, 570",
             "TWIN, 470"
         })
-    public void shouldReturnDecreasedPriceInEarlyCheckOut(Formula formula, int expectedPrice) {
-        assertThat(new Booking(formula, nominalCheckIn, earlyCheckOut).getPrice())
+    public void should_return_decreased_when_last_meal_not_taken(Accommodation accommodation, int expectedPrice) {
+        assertThat(new Booking(accommodation, nominalCheckIn, earlyCheckOut).getPrice())
             .isEqualTo(expectedPrice);
     }
 
-
+    @Test
+    @Parameters(
+        {
+            "SINGLE, 530"
+        })
+    public void should_return_decreased_when_both_first_and_last_meals_not_taken(Accommodation accommodation, int expectedPrice) {
+        assertThat(new Booking(accommodation, lateCheckIn, earlyCheckOut).getPrice()).isEqualTo(expectedPrice);
+    }
 }
